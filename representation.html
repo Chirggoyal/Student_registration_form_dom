@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <style>
+       
+        h1 {
+            text-align: center;
+        }
+        #main_details {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            border: 1px solid red;
+            border-radius: 10px;
+            background-color: grey;
+            justify-content:space-between;
+        }
+        li {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            margin: 20px auto;
+            padding: 10px;
+            width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow:  -5px -5px 10px 3px blue, 5px 5px 10px 3px aqua;
+        }
+        .details {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            border: none;
+            border-radius: 10px;
+            background-color: aqua;
+            justify-content: space-between;
+            
+            
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: greenyellow;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 15px red;
+        }
+        #student_list{
+            list-style: none;
+            padding: 0;
+            overflow-x: scroll;
+            height: 200px;
+            border: 1px solid red;
+
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Details</h1>
+        <ul id="main_details">
+            <li>Id</li>
+            <li>Name</li>
+            <li>Email Id</li>
+            <li>Contact No.</li>
+        </ul>
+        <div id="student_list"></div>
+        <button id="add_button">Add More</button>
+        <button id="clear_button">Clear</button>
+
+    </div>
+
+    <script>
+        const studentList = document.getElementById("student_list");
+        
+
+        function appendStudentDetails() {
+            // It retrieves data from local storage and after that it convert into array if no data then it return empty array
+            const students = JSON.parse(localStorage.getItem("students")) || [];
+
+            //It run a loop on every object and make elements 
+            students.forEach(student => {
+                const details = document.createElement("ul");
+                details.classList.add("details");
+
+                const li1 = document.createElement("li");
+                const li2 = document.createElement("li");
+                const li3 = document.createElement("li");
+                const li4 = document.createElement("li");
+                // const removebtn=document.createElement("button");
+                // removebtn.classList.add("remove_btn")
+
+                li1.textContent = student.id;
+                li2.textContent = student.name;
+                li3.textContent = student.email_id;
+                li4.textContent = student.contact_no;
+                // removebtn.innerHTML="-";
+
+                details.appendChild(li1);
+                details.appendChild(li2);
+                details.appendChild(li3);
+                details.appendChild(li4);
+                // details.appendChild(removebtn);
+
+                studentList.appendChild(details);
+            });
+        }
+
+        appendStudentDetails();
+
+        //if user click on add button it redirect to form page
+        document.getElementById('add_button').addEventListener('click', function () {
+            window.location.href = 'index.html';
+        });
+
+        // If user click on clear button then it clear all the details of student
+        document.getElementById('clear_button').addEventListener('click', function () {
+            localStorage.clear()
+            
+        });
+
+    </script>
+</body>
+</html>

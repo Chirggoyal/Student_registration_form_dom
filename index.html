@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <style>
+        
+        body {
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+            padding: 20px;
+            width: 500px;
+            margin: 0 auto;
+            border-radius: 10px;
+            background-color: white;
+           box-shadow:  -5px -5px 10px 3px blue, 5px 5px 10px 3px aqua;
+           
+        }
+        input {
+            margin-bottom: 10px;
+            width: 100%;
+            height: 28px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100px;
+            background-color: greenyellow;
+            border: none;
+            border-radius: 10px;
+            margin: 10px auto;
+            font-weight: bold;
+            height: 40px;
+            cursor: pointer;
+            box-shadow: 2px 2px 15px red;
+        }
+        
+    </style>
+</head>
+<body>
+   <div class="container">
+    <h1>Student Registration Form</h1>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="id">Student Id:</label>
+        <input type="text" id="id" required>
+        <label for="email">Email Id:</label>
+        <input type="email" id="email" required>
+        <label for="contact">Contact No. :</label>
+        <input type="tel" id="contact" required>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+   </div>
+
+    <script>
+        const form = document.querySelector("#registrationForm");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const name = document.querySelector("#name").value;
+            const id = document.querySelector("#id").value;
+            const email_id = document.querySelector("#email").value;
+            const contact_no = document.querySelector("#contact").value;
+
+            const student = {
+                id: id,
+                name: name,
+                email_id: email_id,
+                contact_no: contact_no
+            };
+            
+             // It retrieves data from local storage and after that it convert into array if no data then it return empty array
+            let students = JSON.parse(localStorage.getItem("students")) || [];
+            
+            
+            students.push(student);
+            
+            
+            localStorage.setItem("students", JSON.stringify(students));
+
+           
+            window.location.href = "representation.html";
+        });
+    </script>
+</body>
+</html>
+
+
+
+
